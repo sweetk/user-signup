@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form action='/' method='post'>
+    <label for='usrname'>Username:</label>
+    <input id='usrname' type='text' name='usrname' value="{0}"/>
+</form>
+
+<form action='/' method='post'>
+    <label for='pass'>Password:</label>
+    <input id='pass' type='text' name='pass'/>
+</form>
+
+<form action='/' method='post'>
+    <label for='pass_verify'>Verify Password:</label>
+    <input id='pass_verify' type='text' name='pass_verify'/>
+</form>
+
+<form action='/' method='post'>
+    <label for='email'>Email (Optional):</label>
+    <input id='email' type='text' name='email' value="{0}"/>
+</form>
+
+<input type='submit' />
+
+{% endblock %}
