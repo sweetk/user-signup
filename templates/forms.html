@@ -5,10 +5,13 @@
 <form action='/welcome' method='post'>
     <label for='usrname'>Username:</label>
     <input id='usrname' type='text' name='usrname'/>
+    {% if error %}
+      <p class='error'>{{ error }}</p>
+    {% endif %}
     <br>
 
-    <label for='pass'>Password:</label>
-    <input id='pass' type='password' name='pass'/>
+    <label for='passw'>Password:</label>
+    <input id='passw' type='password' name='passw'/>
     <br>
 
     <label for='pass_verify'>Verify Password:</label>
@@ -18,7 +21,7 @@
     <label for='email'>Email (Optional):</label>
     <input id='email' type='text' name='email'/>
     <br>
-    
+
     <input action='/welcome' type='submit' />
 </form>
 
