@@ -5,9 +5,6 @@
 <form action='/welcome' method='post'>
     <label for='usrname'>Username:</label>
     <input id='usrname' type='text' name='usrname'/>
-    {% if error %}
-      <p class='error'>{{ error }}</p>
-    {% endif %}
     <br>
 
     <label for='passw'>Password:</label>
@@ -23,6 +20,11 @@
     <br>
 
     <input action='/welcome' type='submit' />
+
+    {% if error %}
+      <p class='error'>{{ error }}</p>
+    {% endif %}
+    
 </form>
 
 
