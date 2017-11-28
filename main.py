@@ -1,5 +1,5 @@
 from flask import Flask, request, redirect, render_template
-import cgi
+import cgi, re
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
@@ -10,6 +10,7 @@ def error_verification():
     pass_verify = request.form['pass_verify']
     email = request.form['email']
 
+    #initialize variables
     error_u = ''
     error_p = ''
     error_pv = ''
@@ -33,21 +34,29 @@ def error_verification():
             error_e = "That is not a valid email."
 
         #check special characters
-        elif '@' not in email or '.' not in email:
-            error_e = "That is not a valid email."
+        elif '@' not in email or '.' not in email or ' ' in email:
+                error_e = "That is not a valid email."
+
+        #too many special characters
+        else:
+            iterate_at = [m.start() for m in re.finditer('\@', email)]
+            iterate_dot = [m.start() for m in re.finditer('\.', email)]
+            if len(iterate_at) > 1:
+                error_e = "That is not a valid email."
+
+            elif len(iterate_dot) > 1:
+                error_e = "That is not a valid email."
 
     if error_u or error_p or error_pv or error_e:
         #return "return redirect('/?error_u=' + error_u + '&error_p=' + error_p + '&error_pv=' + error_pv + '&error_e=' + error_e)"
         return redirect('/?error_u=' + error_u + '&error_p=' + error_p + '&error_pv=' + error_pv + '&error_e=' + error_e)
 
     else:
-        return none
+        return False
 
 @app.route("/")
 def index():
-    #encoded_error = request.args.get("error")
-    #return render_template('forms.html', error=encoded_error)
-
+    #error codes
     encoded_error_u = request.args.get("error_u")
     encoded_error_p = request.args.get("error_p")
     encoded_error_pv = request.args.get("error_pv")
@@ -57,12 +66,8 @@ def index():
 
 @app.route("/welcome", methods=['POST'])
 def welcome():
-
-    #error_verification() #NOT WORKING
-
-    is_error = error_verification()
-    if is_error:
-        return is_error
+    if error_verification():
+        return error_verification()
 
     #Pass form input
     usrname = request.form['usrname']
