@@ -5,26 +5,34 @@
 <form action='/welcome' method='post'>
     <label for='usrname'>Username:</label>
     <input id='usrname' type='text' name='usrname'/>
+    {% if error_u %}
+      <p class='error'>{{ error_u }}</p>
+    {% endif %}
     <br>
 
     <label for='passw'>Password:</label>
     <input id='passw' type='password' name='passw'/>
+    {% if error_p %}
+      <p class='error'>{{ error_p }}</p>
+    {% endif %}
     <br>
 
     <label for='pass_verify'>Verify Password:</label>
     <input id='pass_verify' type='password' name='pass_verify'/>
+    {% if error_pv %}
+      <p class='error'>{{ error_pv }}</p>
+    {% endif %}
     <br>
 
     <label for='email'>Email (Optional):</label>
     <input id='email' type='text' name='email'/>
+    {% if error_e %}
+      <p class='error'>{{ error_e }}</p>
+    {% endif %}
     <br>
 
     <input action='/welcome' type='submit' />
 
-    {% if error %}
-      <p class='error'>{{ error }}</p>
-    {% endif %}
-    
 </form>
 
 
