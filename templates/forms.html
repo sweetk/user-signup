@@ -4,7 +4,7 @@
 
 <form action='/welcome' method='post'>
     <label for='usrname'>Username:</label>
-    <input id='usrname' type='text' name='usrname'/>
+    <input id='usrname' type='text' name='usrname' value='{{ usrname_val }}' />
     {% if error_u %}
       <span class='error'>{{ error_u }}</span>
     {% endif %}
@@ -25,7 +25,7 @@
     <br>
 
     <label for='email'>Email (Optional):</label>
-    <input id='email' type='text' name='email'/>
+    <input id='email' type='text' name='email' value='{{ email_val }}' />
     {% if error_e %}
       <span class='error'>{{ error_e }}</span>
     {% endif %}
